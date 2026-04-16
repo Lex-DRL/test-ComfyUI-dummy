@@ -1,0 +1,23 @@
+name: Test Release
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  get-version:
+    name: Test release-publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: ♻️ Check out code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # critical for changelog + first-release support
+
+      - name: "📦 Just release it!"
+        id: just-release-it
+        uses: Lex-DRL/just-release-it-from-toml-action@main
+#        with:
+#          file: 'pyproject.toml'
+#          field: 'project.version'

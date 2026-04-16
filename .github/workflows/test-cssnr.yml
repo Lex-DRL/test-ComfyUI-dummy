@@ -1,0 +1,31 @@
+name: Test Action (cssnr)
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  get-version:
+    name: "Read and standardize version string"
+    runs-on: ubuntu-latest
+    steps:
+      - name: ♻️ Check out code
+        uses: actions/checkout@v5
+
+      - name: "➡️ Extract version from 'pyproject.toml'"
+        id: toml-version
+        uses: cssnr/toml-action@v1
+        with:
+          file: pyproject.toml
+          path: $.project.version
+
+      - name: "🔢 Standardize Version"
+        id: standard-version
+        uses: Lex-DRL/standardize-version-action@main
+        with:
+          version: '${{ steps.toml-version.outputs.value }}'
+
+      - name: "Echo standardized version"
+        run: |
+          echo "${{ steps.standard-version.outputs.v }}"

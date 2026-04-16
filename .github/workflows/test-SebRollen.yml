@@ -1,0 +1,33 @@
+name: Test Action (SebRollen)
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  get-version:
+    name: "Read and standardize version string"
+    runs-on: ubuntu-latest
+    steps:
+      - name: ♻️ Check out code
+        uses: actions/checkout@v5
+
+      - name: "➡️ Extract version from 'pyproject.toml'"
+        id: toml-version
+        uses: SebRollen/toml-action@main
+        with:
+          file: 'pyproject.toml'
+          field: 'project.version'
+
+      - name: "🔢 Standardize Version"
+        id: standard-version
+        uses: Lex-DRL/standardize-version-action@main
+        with:
+          version: '${{ steps.toml-version.outputs.value }}'
+          skip-python-setup: ''
+
+      - name: "Echo standardized version"
+        run: |
+          echo 'The standard version: ${{ steps.standard-version.outputs.v }}' &&
+          echo 'Is pre-release: ${{ steps.standard-version.outputs.is-pre }}'
