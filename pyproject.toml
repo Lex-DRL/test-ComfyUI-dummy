@@ -15,5 +15,5 @@ Repository = "https://github.com/Lex-DRL/test-ComfyUI-dummy"
 
 [tool.comfy]
 PublisherId = "lex-drl"
-DisplayName = "Best Resolution"
+DisplayName = "test-ComfyUI-dummy"
 Icon = ""
