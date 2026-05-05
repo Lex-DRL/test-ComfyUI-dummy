@@ -1,5 +1,5 @@
 [project]
-name = "test-project"
+name = "test-ComfyUI-dummy"
 description = "some test project"
 version = "v1.2.3"
 authors = [
@@ -10,7 +10,7 @@ readme = "README.md"
 dependencies = []
 
 [project.urls]
-Repository = "https://github.com/Lex-DRL/ComfyUI-BestResolution"
+Repository = "https://github.com/Lex-DRL/test-ComfyUI-dummy"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
